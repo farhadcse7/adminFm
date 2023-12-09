@@ -44,4 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /*relationship with role */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /*relationship with permissions */
+    // true or false
+    public function hasPermission($permission_slug)
+    {
+        return $this->role->permissions()->where('permission_slug', $permission_slug)->first() ? true : false ;
+    }
 }

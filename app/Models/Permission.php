@@ -11,4 +11,16 @@ class Permission extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded=['id'];
+
+    /*relationships with role */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withPivot('role_id');
+    }
+
+    /*relationship with module */
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

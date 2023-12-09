@@ -12,4 +12,10 @@ class Module extends Model
 
     // protected $fillable=['name', 'slug'];
     protected $guarded=['id'];
+
+    /*relationship with permissions */
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
 }
