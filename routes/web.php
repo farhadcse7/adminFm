@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\ModuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*Backend Routes */
+Route::prefix('admin')->middleware(['auth'])->group(function(){
+
+    // Dashboard
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // Resource Routes
+    Route::resource('/module', ModuleController::class);
+
+
+});
