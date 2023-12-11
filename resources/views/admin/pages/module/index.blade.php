@@ -55,10 +55,10 @@
                             </td>
                         </tr>
                         @empty
-
+                        <tr>
+                            <td>No permission found yet!</td>
+                        </tr>
                         @endforelse
-
-
                     </tbody>
                 </table>
             </div>

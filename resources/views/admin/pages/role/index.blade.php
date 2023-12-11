@@ -1,14 +1,7 @@
 @extends('admin.layouts.master')
-@section('page_title', 'Permission Index')
+@section('page_title', 'Role Index')
 
 @push('admin_style')
-<link rel="stylesheet" href="http://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-<style>
-    .current{
-        color: #fff !important;
-        background-color: #696cff !important;
-    }
-</style>
 @endpush
 
 
@@ -17,39 +10,48 @@
     <div class="col">
         <div class="card">
             <div class="d-flex justify-content-between align-items-center my-3">
-                <h5 class="card-header">Permission Index / List Page</h5>
-                <a href="{{ route('permission.create') }}" class="btn btn-primary me-4">Add New</a>
+                <h5 class="card-header">Role Index / List Page</h5>
+                <a href="{{ route('role.create') }}" class="btn btn-primary me-4">Add New</a>
             </div>
 
-            <div class="table-responsive text-nowrap p-3">
-                <table class="table table-hover" id="myTable">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Last Updated</th>
-                            <th>Module Name</th>
-                            <th>Permission Name</th>
-                            <th>Permission Slug</th>
+                            <th>Role Name</th>
+                            <th>Permissions</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($permissions as $permission)
+                        @forelse ($roles as $role)
                         <tr>
-                            <td><strong>{{ $permissions->firstItem() + $loop->index }}</strong></td>
-                            <td>{{ $permission->updated_at->format('d-M-Y') }}</td>
-                            <td>{{ $permission->module->module_name }}</td>
-                            <td>{{ $permission->permission_name }}</td>
-                            <td>{{ $permission->permission_slug }}</td>
+                            <td><strong>{{ $loop->index+1 }}</strong></td>
+                            <td>{{ $role->updated_at->format('d-M-Y') }}</td>
+                            <td>{{ $role->role_name }}</td>
+                            <td>
+                                @foreach ($role->permissions->chunk(5) as $key => $chunks)
+                                <div class="row">
+                                    <div class="col">
+                                        @foreach ($chunks as $permission)
+                                        <span class="badge bg-success">{{ $permission->permission_slug }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endforeach
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('permission.edit', $permission->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <a class="dropdown-item" href="{{ route('role.edit', $role->id) }}"><i class="bx bx-edit-alt me-1"></i>
+                                            Edit</a>
 
-                                        <form action="{{ route('permission.destroy', $permission->id) }}" method="POST">
+                                        <form action="{{ route('role.destroy', $role->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item show_confirm" href="">
@@ -67,23 +69,19 @@
                             <td>No permission found yet!</td>
                         </tr>
                         @endforelse
+
+
                     </tbody>
                 </table>
             </div>
         </div>
-        {{-- <div class="my-4">
-            {{ $permissions->links() }}
-        </div> --}}
     </div>
 </div>
 @endsection
 
 @push('admin_script')
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
 <script>
 $(document).ready(function(){
-    $('#myTable').DataTable();
 
     $('.show_confirm').click(function(event){
         let form = $(this).closest('form');
