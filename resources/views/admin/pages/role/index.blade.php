@@ -48,9 +48,12 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
+
                                         <a class="dropdown-item" href="{{ route('role.edit', $role->id) }}"><i class="bx bx-edit-alt me-1"></i>
                                             Edit</a>
 
+
+                                            @if ($role->is_deleteable && Auth::user()->hasPermission('delete-role'))
                                         <form action="{{ route('role.destroy', $role->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -59,7 +62,7 @@
                                                 Delete
                                             </button>
                                         </form>
-
+                                        @endif
                                     </div>
                                 </div>
                             </td>
