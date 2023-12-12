@@ -21,11 +21,21 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-fullname">Role Name</label>
-                            <input type="text" name="role_name" class="form-control" id="basic-default-fullname" placeholder="enter a role name">
+                            <input type="text" name="role_name" class="form-control @error('role_name') is-invalid @enderror" id="basic-default-fullname" placeholder="enter a role name">
+                            @error('role_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="basic-default-fullname">Role Note</label>
-                            <input type="text" name="role_note" class="form-control" id="basic-default-fullname" placeholder="enter a role note">
+                            <input type="text" name="role_note" class="form-control @error('role_note') is-invalid @enderror" id="basic-default-fullname" placeholder="enter a role note">
+                            @error('role_note')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         {{-- <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="is_deleteable" id="defaultCheck3" checked>
@@ -33,7 +43,12 @@
                         </div> --}}
 
                         <div class="mt-4 mb-2">
-                            <strong>Manage Permissions for Role</strong>
+                            <strong class="@error('permissions') is-invalid @enderror">Manage Permissions for Role</strong>
+                            @error('permissions')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-check mb-3">

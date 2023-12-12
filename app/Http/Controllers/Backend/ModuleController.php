@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ModuleStoreRequest;
 
 class ModuleController extends Controller
@@ -16,6 +17,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('index-module'); // authorize this user to access/give access to admin dashboard
         $modules = Module::select(['id', 'module_name', 'module_slug', 'updated_at'])
             ->latest()
             ->get();
@@ -28,6 +30,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-module'); // authorize this user to access/give access to admin dashboard
         return view('admin.pages.module.create');
     }
 
@@ -36,6 +39,7 @@ class ModuleController extends Controller
      */
     public function store(ModuleStoreRequest $request)
     {
+        Gate::authorize('create-module'); // authorize this user to access/give access to admin dashboard
         //dd($request->all());
         Module::updateOrCreate([
             'module_name' => $request->module_name,
@@ -59,6 +63,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('edit-module'); // authorize this user to access/give access to admin dashboard
         $module = Module::find($id);
         return view('admin.pages.module.edit', compact('module'));
     }
@@ -68,6 +73,7 @@ class ModuleController extends Controller
      */
     public function update(ModuleStoreRequest $request, $id)
     {
+        Gate::authorize('edit-module'); // authorize this user to access/give access to admin dashboard
         $module = Module::find($id);
         $module->update([
             'module_name' => $request->module_name,
@@ -83,6 +89,7 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-module'); // authorize this user to access/give access to admin dashboard
         // dd($id);
         $module = Module::find($id);
         $module->delete();

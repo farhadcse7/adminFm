@@ -23,7 +23,7 @@ class RoleUpdateRequest extends FormRequest
     {
         return [
             // 'role_name' => 'required|unique:roles',
-            'role_name' => 'required', //changed here
+            'role_name' => 'required|string', //changed here
             'role_note' => 'nullable|string|max:255',
             'permissions' => 'required|array',
             'permissions.*' => 'integer',

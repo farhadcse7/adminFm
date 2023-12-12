@@ -69,6 +69,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">System Setting</span>
         </li>
+        @can('index-module')
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -87,6 +88,10 @@
                 </li>
             </ul>
         </li>
+        @endcan
+
+
+        @can('index-permission')
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -105,6 +110,10 @@
                 </li>
             </ul>
         </li>
+        @endcan
+
+
+        @can('index-role')
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-check"></i>
@@ -123,6 +132,8 @@
                 </li>
             </ul>
         </li>
+        @endcan
+
     </ul>
 
 

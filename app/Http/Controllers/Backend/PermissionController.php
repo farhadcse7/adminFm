@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\PermissionStoreRequest;
 
 class PermissionController extends Controller
@@ -17,6 +18,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        Gate::authorize('index-permission'); // authorize this user to access/give access to admin dashboard
         $permissions = Permission::with(['module:id,module_name,module_slug'])
         ->select(['id', 'module_id', 'permission_name', 'permission_slug', 'updated_at'])
         ->latest()
@@ -30,6 +32,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-permission'); // authorize this user to access/give access to admin dashboard
         $modules = Module::select(['id', 'module_name'])->get();
         return view('admin.pages.permission.create', compact('modules'));
     }
@@ -39,6 +42,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionStoreRequest $request)
     {
+        Gate::authorize('create-permission'); // authorize this user to access/give access to admin dashboard
         Permission::updateOrCreate([
             'module_id' => $request->module_id,
             'permission_name' => $request->permission_name,
@@ -62,6 +66,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('edit-permission'); // authorize this user to access/give access to admin dashboard
         $permission = Permission::find($id);
         $modules = Module::select(['id', 'module_name'])->get();
         return view('admin.pages.permission.edit', compact('modules', 'permission'));
@@ -72,6 +77,7 @@ class PermissionController extends Controller
      */
     public function update(PermissionStoreRequest $request, $id)
     {
+        Gate::authorize('edit-permission'); // authorize this user to access/give access to admin dashboard
         $permission = Permission::find($id);
         $permission->update([
             'module_id' => $request->module_id,
@@ -88,6 +94,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-permission'); // authorize this user to access/give access to admin dashboard
         $permission = Permission::find($id);
         $permission->delete();
 
