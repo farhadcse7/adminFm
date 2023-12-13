@@ -134,6 +134,27 @@
         </li>
         @endcan
 
+        @can('index-user')
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-plus"></i>
+                <div data-i18n="Account Settings">User Settings</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('users.index') }}" class="menu-link">
+                        <div data-i18n="Account">List</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('users.create') }}" class="menu-link">
+                        <div data-i18n="Notifications">Create</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endcan
+
     </ul>
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('/module', ModuleController::class);
     Route::resource('/permission', PermissionController::class);
     Route::resource('/role', RoleController::class);
+    Route::resource('/users', UserController::class);
 
 
 });
