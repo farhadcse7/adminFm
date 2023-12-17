@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\PermissionController;
 
 /*
@@ -24,6 +25,9 @@ use App\Http\Controllers\Backend\PermissionController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('{page_slug}', [FrontendController::class, 'index']);
+
 
 Auth::routes();
 
