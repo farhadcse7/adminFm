@@ -72,6 +72,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
         /*Apperance Setting */
         Route::get('apperance', [SettingController::class, 'apperance'])->name('apperance');
         Route::post('apperance', [SettingController::class, 'apperanceUpdate'])->name('apperance.update');
+
+        /*Mail Setting */
+        Route::get('mail', [SettingController::class, 'mailView'])->name('mail');
+        Route::post('mail', [SettingController::class, 'mailUpdate'])->name('mail.update');
     });
 
 });
