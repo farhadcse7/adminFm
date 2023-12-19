@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\BackupController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\PermissionController;
 
@@ -61,5 +62,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('update-password', [ProfileController::class, 'getUpdatePassword'])->name('getupdate.password');
     Route::post('update-password', [ProfileController::class, 'updatePassword'])->name('postupdate.password');
 
+
+    // System Setting Management Routes
+    Route::group(['as' =>'settings.', 'prefix' => 'settings'], function(){
+        Route::get('general', [SettingController::class, 'general'])->name('general');
+        Route::post('general', [SettingController::class, 'generalUpdate'])->name('general.update');
+    });
 
 });
