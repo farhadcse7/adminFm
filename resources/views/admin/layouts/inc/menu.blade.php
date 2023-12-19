@@ -204,6 +204,11 @@
                         <div data-i18n="Account">General Setting</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('settings.apperance') }}" class="menu-link">
+                        <div data-i18n="Account">Apperance Setting</div>
+                    </a>
+                </li>
             </ul>
         </li>
         {{-- @endcan --}}

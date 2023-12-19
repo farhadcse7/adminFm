@@ -65,8 +65,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
 
     // System Setting Management Routes
     Route::group(['as' =>'settings.', 'prefix' => 'settings'], function(){
+        /*General Setting */
         Route::get('general', [SettingController::class, 'general'])->name('general');
         Route::post('general', [SettingController::class, 'generalUpdate'])->name('general.update');
+
+        /*Apperance Setting */
+        Route::get('apperance', [SettingController::class, 'apperance'])->name('apperance');
+        Route::post('apperance', [SettingController::class, 'apperanceUpdate'])->name('apperance.update');
     });
 
 });
