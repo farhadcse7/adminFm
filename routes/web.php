@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
@@ -32,6 +33,12 @@ Route::get('page/{page_slug}', [FrontendController::class, 'index']);
 
 
 Auth::routes();
+
+/*Socialite Login Routes*/
+Route::group(['as' => 'login.', 'prefix'=>'login'], function(){
+    Route::get('/{provider}', [LoginController::class, 'redirectToProvider'])->name('provider');
+    Route::get('/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('provider.callback');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
