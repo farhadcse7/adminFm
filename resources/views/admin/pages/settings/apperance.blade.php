@@ -23,7 +23,7 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="bg_color">Background Color</label>
-                        <input type="text" name="bg_color" value="{{ setting('bg_color') }}" class="form-control @error('bg_color') is-invalid @enderror"  id="bg_color" placeholder="Site title">
+                        <input type="text" name="bg_color" value="{{ setting('bg_color') }}" class="form-control @error('bg_color') is-invalid @enderror" id="bg_color" placeholder="Background Color">
                         @error('bg_color')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -32,8 +32,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="site_logo">Upload Logo</label>
-                        <input type="file" class="dropify @error('logo_image') is-invalid @enderror" name="logo_image" data-default-file="{{ setting('logo_image') !=null ? Storage::url(setting('logo_image')):'' }}"/>
+                        <label class="form-label" for="logo_image">Upload Logo</label>
+                        <input type="file" class="dropify @error('logo_image') is-invalid @enderror" id="logo_image" name="logo_image" data-default-file="{{ setting('logo_image') !=null ? Storage::url(setting('logo_image')):'' }}"/>
                         @error('logo_image')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="favicon_image">Upload Favicon (Size: 33 X 33)</label>
-                        <input type="file" class="dropify @error('favicon_image') is-invalid @enderror" name="favicon_image" data-default-file="{{ setting('favicon_image') !=null ? Storage::url(setting('favicon_image')):'' }}" />
+                        <input type="file" class="dropify @error('favicon_image') is-invalid @enderror" id="favicon_image" name="favicon_image" data-default-file="{{ setting('favicon_image') !=null ? Storage::url(setting('favicon_image')):'' }}" />
                         @error('favicon_image')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

@@ -192,7 +192,7 @@
         </li>
         @endcan
 
-        {{-- @can('index-backup') --}}
+        @can('general-setting-view')
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
@@ -216,7 +216,7 @@
                 </li>
             </ul>
         </li>
-        {{-- @endcan --}}
+        @endcan
 
     </ul>
 

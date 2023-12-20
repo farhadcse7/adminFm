@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ApperanceUpdateRequest;
 use App\Http\Requests\MailSettingUpdateRequest;
@@ -15,11 +16,13 @@ class SettingController extends Controller
 {
     public function general()
     {
+        Gate::authorize('general-setting-view');
         return view('admin.pages.settings.general');
     }
 
     public function generalUpdate(GeneralSettingUpdateRequest $request)
     {
+        Gate::authorize('general-setting-update');
         Setting::updateOrCreate(
             ['name' => 'site_title'],
             ['value' => $request->site_title],
@@ -57,11 +60,13 @@ class SettingController extends Controller
 
     public function apperance()
     {
+        Gate::authorize('appearance-setting-view');
         return view('admin.pages.settings.apperance');
     }
 
     public function apperanceUpdate(ApperanceUpdateRequest $request)
     {
+        Gate::authorize('appearance-setting-update');
         Setting::updateOrCreate(
             ['name' => 'bg_color'],
             ['value' => $request->bg_color],
@@ -93,15 +98,17 @@ class SettingController extends Controller
     private function deleteOldFile($path){
         Storage::disk('public')->delete($path);
     }
-    
+
 
     public function mailView()
     {
+        Gate::authorize('mail-setting-view');
         return view('admin.pages.settings.mail');
     }
 
     public function mailUpdate(MailSettingUpdateRequest $request)
     {
+        Gate::authorize('mail-setting-update');
         Setting::updateOrCreate(
             ['name' => 'mail_mailer'],
             ['value' => $request->mail_mailer],
