@@ -214,6 +214,11 @@
                         <div data-i18n="Account">Mail Setting</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('settings.socialite') }}" class="menu-link">
+                        <div data-i18n="Account">Socialite Setting</div>
+                    </a>
+                </li>
             </ul>
         </li>
         @endcan
